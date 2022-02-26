@@ -1,0 +1,31 @@
+import java.io.File;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+public class Filewriter {
+	public static void main(String[] args) {
+		try(Scanner fin = new Scanner(new File("input.txt"))) {
+			try(PrintWriter pw = new PrintWriter("transactions.txt")) {
+				String bName = " ", fName = " ", lName = " ", name = " ", total = " ";
+				fin.nextLine();
+				while(fin.hasNextLine()) {
+					String[] parts = fin.nextLine().split("\t");
+					bName = parts[0];
+					fName = parts[1];
+					lName = parts[2];
+					name = fName + " " + lName;
+					total = parts[3];
+					pw.write(bName.toString() + " " + name.toString() + " " + total.toString() + "\n");
+				}
+				
+				pw.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} 		
+	}
+}
+
+
